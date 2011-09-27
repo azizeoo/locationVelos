@@ -85,24 +85,4 @@ public class DaoVeloImpl implements IDaoVelo {
 		return ApplicationContext.veloResultSetToList(rs);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.norsys.formation.locationvelos.dao.IDaoVelo#selectAllVelo(DtoVelo)
-	 */
-	public ResultSet selectAllVelo(
-			DtoVelo v)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.norsys.formation.locationvelos.dao.IDaoVelo#selectVeloByClient(DtoVelo)
-	 */
-	public ResultSet selectVeloByClient(
-			DtoVelo c)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

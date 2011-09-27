@@ -20,9 +20,11 @@ import fr.norsys.formation.locationvelos.dto.DtoVelo;
  */
 public class ApplicationContextTest {
 	private Connection conn;
+	private ApplicationContext app;
 	
 	@Before
 	public void initConnexion() throws Exception{
+		app = new ApplicationContext();
 		conn = ApplicationContext.getConnexion();
 	}
 	/**
@@ -30,7 +32,8 @@ public class ApplicationContextTest {
 	 * - Alors il sera différent de null
 	 */
 	@Test
-	public void initialiseSavoirConnEtVerifierQuIlNestPasNull() throws Exception  {
+	public void initialiseSavoirConnEtAppEtVerifierQuIlNestPasNull() throws Exception  {
+		assertNotNull(app);
 		assertNotNull(conn);
 	}
 
