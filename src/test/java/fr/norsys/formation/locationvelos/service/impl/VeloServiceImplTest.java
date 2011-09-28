@@ -75,7 +75,7 @@ public class VeloServiceImplTest {
 		when(dao.createVelo(dtoVelo)).thenThrow(new SQLException());
 		try{
 			assertEquals(1, service.ajouterVelo(dtoVelo));
-			service.ajouterVelo(dtoVelo);fail();
+			fail();
 		}catch (SQLException e) {
 			assertTrue("2eme appel",true);
 		}	
