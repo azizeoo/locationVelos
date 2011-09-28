@@ -34,7 +34,7 @@ public class ClientServiceImplTest {
 	}
 	
 	/**
-	 * - Soit l'objet ClientServiceImplTest, lorsqu'on l'initialise - Alors il
+	 * - Soit l'objet ClientServiceImpl, lorsqu'on l'initialise - Alors il
 	 * - sera différent de null
 	 */
 	@Test

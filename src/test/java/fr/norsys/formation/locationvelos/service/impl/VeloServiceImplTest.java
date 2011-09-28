@@ -46,7 +46,7 @@ public class VeloServiceImplTest {
 	}
 
 	/**
-	 * - Soit l'objet VeloServiceImplTest, lorsqu'on l'initialise - Alors il
+	 * - Soit l'objet VeloServiceImpl, lorsqu'on l'initialise - Alors il
 	 * - sera différent de null
 	 */
 	@Test
