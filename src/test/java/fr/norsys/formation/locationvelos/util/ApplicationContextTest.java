@@ -19,8 +19,8 @@ import fr.norsys.formation.locationvelos.dto.DtoVelo;
  *
  */
 public class ApplicationContextTest {
-	private Connection conn;
-	private ApplicationContext app;
+	private Connection conn = null;
+	private ApplicationContext app = null;
 	
 	@Before
 	public void initConnexion() throws Exception{
@@ -38,9 +38,9 @@ public class ApplicationContextTest {
 	}
 
 	/**
-	 * - Etant donné l'objet conn initialisé
+	 * - Étant donné l'objet conn initialisé
 	 * - Lorsqu'on utilise le savoir faire +genCode
-	 * - On obient une chaine de caracteres de 10 caracteres
+	 * - On obtient une chaîne de caractères de 10 caractères
 	 * 
 	 */
 	@Test
@@ -51,9 +51,9 @@ public class ApplicationContextTest {
 	}
 	
 	/**
-	 * - Etant donné l'objet conn initialisé
-	 * - Lorsqu'on utilise le savoir faire +veloResultSetToList avec le prametre 'null'
-	 * - On obient une list vide des vélos size = 0
+	 * - Étant donné l'objet conn initialisé
+	 * - Lorsqu'on utilise le savoir faire +veloResultSetToList avec le paramètre 'null'
+	 * - On obtient une liste vide des vélos size = 0
 	 * 
 	 */
 	@Test

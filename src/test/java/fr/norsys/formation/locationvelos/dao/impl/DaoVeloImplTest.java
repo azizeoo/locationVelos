@@ -40,8 +40,8 @@ public class DaoVeloImplTest{
 	}
 	
 	/**
-	 * - Etant donné l'objet DaoVeloImpl initialisé 
-	 * - Lorque on utilise le savoir faire +createVelo avec comme parametre DtoVelo au code '111111111'
+	 * - Étant donné l'objet DaoVeloImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +createVelo avec comme paramètre DtoVelo au code '111111111'
 	 * - DtoVelo utilise un DtoClient existant
 	 * - Alors on obtient '1' comme résultat
 	 */
@@ -51,8 +51,8 @@ public class DaoVeloImplTest{
 	}
 
 	/**
-	 * - Etant donné l'objet DaoVeloImpl initialisé 
-	 * - Lorque on utilise le savoir faire +updateVelo avec comme parametre DtoVelo au code '111111111'
+	 * - Étant donné l'objet DaoVeloImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +updateVelo avec comme paramètre DtoVelo au code '111111111'
 	 * - Alors on obtient '1' comme résultat
 	 */
 	@Test
@@ -61,11 +61,11 @@ public class DaoVeloImplTest{
 	}
 	
 	/**
-	 * - Etant donné l'objet DaoVeloImpl initialisé 
-	 * - Lorque on utilise le savoir faire +selectVelo avec comme parametre '111111111'
+	 * - Étant donné l'objet DaoVeloImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +selectVelo avec comme paramètre '111111111'
 	 * - Alors on obtient resultSet comme résultat
 	 * - On utilisant le savoir faire +ApplicationContext.veloResultSetToList
-	 * - Ob obtient une liste d'u seul élément
+	 * - On obtient une liste d'un seul élément
 	 */
 	@Test
 	public void initialiseDtoVeloImplEtUtilisationDeSavoirFaireSelectVeloPourSelectionnerUnDtoVeloAuCode111111111() throws Exception{
@@ -74,18 +74,18 @@ public class DaoVeloImplTest{
 	}
 	
 	/**
-	 * - Etant donné l'objet DaoVeloImpl initialisé 
-	 * - Lorque on utilise le savoir faire +deleteVelo avec comme parametre '111111111'
+	 * - Étant donné l'objet DaoVeloImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +deleteVelo avec comme paramètre '111111111'
 	 * - Alors on obtient '1' comme résultat
 	 * - On utilisant le savoir faire +ApplicationContext.veloResultSetToList
-	 * - Ob obtient une liste d'u seul élément
+	 * - On obtient une liste d'u seul élément
 	 */
 	@Test
 	public void initialiseDtoVeloImplEtUtilisationDeSavoirFaireDeleteVeloPourSupprimerDtoVeloAUCode111111111() throws Exception{
 		assertEquals(1, dao.deleteVelo("111111111"));
 	}
 	/**
-	 * - Méthode intèrmede pour creer un objet DtoVelo
+	 * - Méthode intermède pour créer un objet DtoVelo
 	 */
 	private static DtoVelo creerDtoVeloAvecDtoClientExistant(){
 		DtoVelo velo = new DtoVelo();
@@ -106,7 +106,7 @@ public class DaoVeloImplTest{
 	}
 	
 	/**
-	 * - Méthode intèrmede pour creer un objet DtoVelo modifié
+	 * - Méthode intermède pour créer un objet DtoVelo modifié
 	 */
 	private static DtoVelo modifierDtoVeloExistant(){
 		DtoVelo velo = new DtoVelo();

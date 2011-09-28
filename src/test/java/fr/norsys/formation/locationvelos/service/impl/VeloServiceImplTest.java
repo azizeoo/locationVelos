@@ -45,7 +45,7 @@ public class VeloServiceImplTest {
 
 	/**
 	 * - Soit l'objet VeloServiceImplTest, lorsqu'on l'initialise - Alors il
-	 * sera différent de null
+	 * - sera différent de null
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerifierQuIlNestPasNull()
@@ -55,7 +55,7 @@ public class VeloServiceImplTest {
 
 	/**
 	 * - Étant donné l'objet VeloServiceImpl initialisé - Alors on va tester le
-	 * savoir du VeloServiceImpl s'il est différent de null
+	 * - savoir du VeloServiceImpl s'il est différent de null
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerifierQueSonSavoirNestPasNull()
@@ -65,7 +65,7 @@ public class VeloServiceImplTest {
 
 	/**
 	 * - Étant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
-	 * savoir faire +ajouterVelo - On obtient '1' comme résultat
+	 * - savoir faire +ajouterVelo - On obtient '1' comme résultat
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerfieSavoirFaireAjouterVelo()
@@ -83,7 +83,7 @@ public class VeloServiceImplTest {
 
 	/**
 	 * - Étant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
-	 * savoir faire +modifierVelo - On obtient '1' comme résultat
+	 * - savoir faire +modifierVelo - On obtient '1' comme résultat
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerfieSavoirFaireModifierVelo()
