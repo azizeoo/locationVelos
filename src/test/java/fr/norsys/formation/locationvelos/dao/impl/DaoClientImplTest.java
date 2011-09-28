@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
-import fr.norsys.formation.locationvelos.dto.DtoVelo;
 import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
@@ -25,7 +24,7 @@ public class DaoClientImplTest {
 	private Connection conn;
 
 	@Before
-	public void DaoVeloImpl() throws Exception{
+	public void DaoClientImpl() throws Exception{
 		conn = ApplicationContext.getConnexion();
 		dao = new DaoClientImpl(conn);
 	}
@@ -34,18 +33,29 @@ public class DaoClientImplTest {
 	 * - Alors il sera différent de null
 	 */
 	@Test
-	public void initialiseDaoVeloImplEtVerifierQuIlNestPasNull() throws Exception  {
+	public void initialiseDaoClientImplEtVerifierQuIlNestPasNull() throws Exception  {
 		assertNotNull(dao);
 	}
+	
 	/**
 	 * - Étant donné l'objet DaoClientImpl initialisé 
-	 * - Lorsque on utilise le savoir faire +createClient avec comme paramètre ClientVelo au code '111111111'
+	 * - Lorsque on utilise le savoir faire +createClient avec comme paramètre ClientClient au code '111111111'
 	 * - Alors on obtient '1' comme résultat
 	 */
 	@Test
-	public void initialiseDtoVeloImplEtUtilisationDeSavoirFaireCreateVeloPourEnregistreUnDtoVeloAuCode111111111PourDtoClientExistant() throws Exception{
-		assertEquals(1, dao.createVelo(creerDtoClient()));
+	public void initialiseDtoClientImplEtUtilisationDeSavoirFaireCreateClientPourEnregistreUnDtoClientAuCode111111111PourDtoClientExistant() throws Exception{
+		assertEquals(1, dao.createClient(creerDtoClient()));
 	}
+	
+	/**
+	 * - Étant donné l'objet DaoClientImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +deleteClient avec comme paramètre '111111111'
+	 * - Alors on obtient '1' comme résultat
+	 */
+	@Test
+	public void initialiseDtoClientImplEtUtilisationDeSavoirFaireDeleteClientPourSupprimerDtoClientAUCode111111111() throws Exception{
+		assertEquals(1, dao.deleteClient("111111111"));
+	}	
 	/**
 	 * - Méthode intermède pour créer un objet DtoClient
 	 */
