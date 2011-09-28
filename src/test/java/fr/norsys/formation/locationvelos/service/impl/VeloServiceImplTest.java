@@ -5,9 +5,20 @@ package fr.norsys.formation.locationvelos.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +54,8 @@ public class VeloServiceImplTest {
 	}
 
 	/**
-	 * - Etant donné l'objet VeloServiceImpl initialisé - Alors on va tester le
-	 * savoir du VeloServiceImpl s'il est different de null
+	 * - Étant donné l'objet VeloServiceImpl initialisé - Alors on va tester le
+	 * savoir du VeloServiceImpl s'il est différent de null
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerifierQueSonSavoirNestPasNull()
@@ -53,7 +64,7 @@ public class VeloServiceImplTest {
 	}
 
 	/**
-	 * - Etant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
+	 * - Étant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
 	 * savoir faire +ajouterVelo - On obtient '1' comme résultat
 	 */
 	@Test
@@ -61,11 +72,17 @@ public class VeloServiceImplTest {
 			throws Exception {
 		DtoVelo dtoVelo = new DtoVelo();
 		when(dao.createVelo(dtoVelo)).thenReturn(1);
-		assertEquals(0, service.ajouterVelo(new DtoVelo()));
+		when(dao.createVelo(dtoVelo)).thenThrow(new SQLException());
+		try{
+			assertEquals(1, service.ajouterVelo(dtoVelo));
+			service.ajouterVelo(dtoVelo);fail();
+		}catch (SQLException e) {
+			assertTrue("2eme appel",true);
+		}	
 	}
 
 	/**
-	 * - Etant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
+	 * - Étant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
 	 * savoir faire +modifierVelo - On obtient '1' comme résultat
 	 */
 	@Test
@@ -77,22 +94,54 @@ public class VeloServiceImplTest {
 	}
 	
 	/**
-	 * - Etant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
+	 * - Étant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
 	 * - savoir faire +rechercherVelo - On obtient dtoVelo comme résultat
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerfieSavoirFaireRechercherVelo()
 			throws Exception {
+		//utilisation de spy et mock combiné
 		List<DtoVelo> list = new ArrayList<DtoVelo>();
+		List<DtoVelo> spy = spy(list);
 		DtoVelo dtoVelo = new DtoVelo();
-		list.add(dtoVelo);
-		when(dao.selectVelo("")).thenReturn(list);
+		spy.add(dtoVelo);
+		
+		//personnaliser le comportement selectVelo("")
+		when(dao.selectVelo("")).thenReturn(spy);
+		
+		//personnaliser le comportement size()
+		when(spy.size()).thenReturn(100);
+		
+		//personnaliser le comportement get(1)
+		doReturn("test").when(spy).get(1);
+		
+		//description JUnit
+		assertEquals("test", spy.get(1));
+		assertEquals(100, dao.selectVelo("").size());
 		assertEquals(dtoVelo, service.rechercherVelo(""));
+		
+		//on vérifie que la méthode selectVelo() est appelée deux fois exactement
+		verify(dao,times(2)).selectVelo("");
+		
+		//on vérifie que la méthode size() est appelée une et une seul fois
+		verify(spy,times(1)).size();
+		
+		//on vérifie que la méthode size() est appelée une fois ou plus (1,+)
+		verify(spy,atLeastOnce()).size();
+		
+		//on vérifie que la méthode size() est appelée une fois ou moins (1,+)
+		verify(spy,atLeast(1)).size();
+		
+		//on vérifie que la méthode size() est appelée une fois ou plus (0,1)
+		verify(spy,atMost(1)).size();
+		
+		//on vérifie si jamais la méthode remove() est appelée
+		verify(spy,never()).remove(1);
 	}
 	
 	/**
-	 * - Etant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
-	 * savoir faire +supprimerVelo - On obtient '1' comme résultat
+	 * - Étant donné l'objet VeloServiceImpl initialisé - Lorsqu'on utilise le
+	 * - savoir faire +supprimerVelo - On obtient '1' comme résultat
 	 */
 	@Test
 	public void initialiseVeloServiceImplEtVerfieSavoirFaireSupprimerVelo()
