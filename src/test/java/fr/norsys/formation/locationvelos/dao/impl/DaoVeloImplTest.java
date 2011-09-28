@@ -77,8 +77,6 @@ public class DaoVeloImplTest{
 	 * - Étant donné l'objet DaoVeloImpl initialisé 
 	 * - Lorsque on utilise le savoir faire +deleteVelo avec comme paramètre '111111111'
 	 * - Alors on obtient '1' comme résultat
-	 * - On utilisant le savoir faire +ApplicationContext.veloResultSetToList
-	 * - On obtient une liste d'u seul élément
 	 */
 	@Test
 	public void initialiseDtoVeloImplEtUtilisationDeSavoirFaireDeleteVeloPourSupprimerDtoVeloAUCode111111111() throws Exception{

@@ -17,6 +17,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.inOrder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import fr.norsys.formation.locationvelos.dao.IDaoVelo;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
@@ -137,6 +139,17 @@ public class VeloServiceImplTest {
 		
 		//on vérifie si jamais la méthode remove() est appelée
 		verify(spy,never()).remove(1);
+		
+		//on vérifie l'ordre (un seul objet)des méthodes size() et add() -- add() puis size()--
+		InOrder inOrder = inOrder(spy);
+		
+		inOrder.verify(spy).add(dtoVelo);
+		inOrder.verify(spy).size();
+		
+		//on vérifie l'ordre (2 objets) des méthodes spy.get(1) et dao.selectVelo("") -- spy.get(1) puis dao.selectVelo("")--
+		InOrder inOrder2 = inOrder(spy,dao);
+		inOrder2.verify(spy).get(1);
+		inOrder2.verify(dao).selectVelo("");
 	}
 	
 	/**

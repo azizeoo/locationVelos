@@ -27,6 +27,10 @@ public class ApplicationContext {
 	private static final String PWD		= "location";
 	private static JDBCDataSource DATASOURCE;
 	
+	/**
+	 * METHODE POUR CONFIGURER LES INFORMATIONS NÈCESSAIRES POUR ACCÈS A LA BASE DE DONNÈES
+	 * @return
+	 */
 	private static DataSource getApplicationDataSource() {
 		if (null == DATASOURCE) {
 			DATASOURCE = new JDBCDataSource();
@@ -37,12 +41,20 @@ public class ApplicationContext {
 		return DATASOURCE;
 	}
 
-
+	/**
+	 * METHODE POUR RENDRE LA CONNEXION VERS LA BASE DE DONNÈES
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Connection getConnexion() throws SQLException{
 		DataSource ds = getApplicationDataSource();
 		return ds.getConnection();
 	}
-
+	
+	/**
+	 * METHODE POUR RENDRE UN CODE DE 10 CARACTERES
+	 * @return
+	 */
 	public static String genCode() {
 		long date = new Date().getTime();
 		String s = String.valueOf(date);
@@ -50,6 +62,12 @@ public class ApplicationContext {
 		return s;
 	}
 	
+	/**
+	 * METHODE POUR CONVERTIR UNE RESULTSET DE DtoVelo EN LISTE DE DtoVelo
+	 * @param r
+	 * @return
+	 * @throws SQLException
+	 */
 	public static List<DtoVelo> veloResultSetToList(ResultSet r) throws SQLException{
 		DtoVelo velo;
 		DtoClient client;
@@ -65,5 +83,24 @@ public class ApplicationContext {
 			listVelo.add(velo);
 		}
 		return listVelo;
+	}
+
+	/**
+	 * METHODE POUR CONVERTIR UNE RESULTSET DE DtoClient EN LISTE DE DtoClient
+	 * @param r
+	 * @return
+	 * @throws SQLException
+	 */
+	public static List<DtoClient> clientResultSetToList(ResultSet r) throws SQLException{
+		DtoClient client;
+		List<DtoClient> listClient = new ArrayList<DtoClient>();
+		while(null != r && r.next()){
+			client = new DtoClient();
+			client.setCodeClient(r.getString("COD_CLIENT"));
+			client.setNom(r.getString("NOM"));
+			client.setPrenom(r.getString("PRENOM"));
+			listClient.add(client);
+		}
+		return listClient;
 	}
 }

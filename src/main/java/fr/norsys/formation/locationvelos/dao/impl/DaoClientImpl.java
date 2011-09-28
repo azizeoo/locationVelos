@@ -5,10 +5,14 @@ package fr.norsys.formation.locationvelos.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
+import fr.norsys.formation.locationvelos.dto.DtoVelo;
+import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
  * @author technomaker09
@@ -17,6 +21,10 @@ import fr.norsys.formation.locationvelos.dto.DtoClient;
 public class DaoClientImpl implements IDaoClient {
 	private String addClientQuery						= "INSERT INTO CLIENT VALUES(? , ? , ?)";
 	private String deleteClientQuery					= "DELETE FROM CLIENT WHERE COD_CLIENT= ?";
+	private String modifyClientQuery					= "UPDATE CLIENT SET NOM= ?, PRENOM= ? WHERE COD_CLIENT= ?";
+	private String findAllClientQuery 					= "SELECT COD_CLIENT, NOM, PRENOM FROM CLIENT ";
+	private String byIdQuery 							= "WHERE COD_CLIENT=?";
+	
 	private Connection conn;
 	/**
 	 * @param conn 
@@ -43,6 +51,24 @@ public class DaoClientImpl implements IDaoClient {
 		int maj = pstmt.executeUpdate();
 		pstmt.close();
 		return maj;
+	}
+
+	public int updateClient(DtoClient client) throws SQLException {
+		PreparedStatement pstmt = conn.prepareStatement(modifyClientQuery);
+		pstmt.setString(3, client.getCodeClient());
+		pstmt.setString(1, client.getNom());
+		pstmt.setString(2, client.getPrenom());
+		int maj = pstmt.executeUpdate();
+		pstmt.close();
+		return maj;
+	}
+
+	public List<DtoClient> selectClient(String code) throws SQLException {
+		PreparedStatement pstmt = conn.prepareStatement(findAllClientQuery + byIdQuery);
+		pstmt.setString(1, code);
+		ResultSet rs = pstmt.executeQuery();
+		pstmt.close();
+		return ApplicationContext.clientResultSetToList(rs);
 	}
 
 }

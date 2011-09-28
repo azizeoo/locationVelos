@@ -19,10 +19,13 @@ import fr.norsys.formation.locationvelos.util.ApplicationContext;
  * @author technomaker09
  *
  */
+/**
+ *  -L'ordre des tests est important
+ * 
+ */
 public class DaoClientImplTest {
 	private IDaoClient dao;
 	private Connection conn;
-
 	@Before
 	public void DaoClientImpl() throws Exception{
 		conn = ApplicationContext.getConnexion();
@@ -46,7 +49,29 @@ public class DaoClientImplTest {
 	public void initialiseDtoClientImplEtUtilisationDeSavoirFaireCreateClientPourEnregistreUnDtoClientAuCode111111111PourDtoClientExistant() throws Exception{
 		assertEquals(1, dao.createClient(creerDtoClient()));
 	}
+
+	/**
+	 * - Étant donné l'objet DaoClientImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +updateClient avec comme paramètre DtoClient au code '111111111'
+	 * - Alors on obtient '1' comme résultat
+	 */
+	@Test
+	public void initialiseDtoClientImplEtUtilisationDeSavoirFaireUpdateClientPourModifierUnDtoClientAuCode111111111() throws Exception{
+		assertEquals(1, dao.updateClient(modifierDtoClientExistant()));
+	}
 	
+	/**
+	 * - Étant donné l'objet DaoClientImpl initialisé 
+	 * - Lorsque on utilise le savoir faire +selectClient avec comme paramètre '111111111'
+	 * - Alors on obtient resultSet comme résultat
+	 * - On utilisant le savoir faire +ApplicationContext.veloResultSetToList
+	 * - On obtient une liste d'un seul élément
+	 */
+	@Test
+	public void initialiseDtoClientImplEtUtilisationDeSavoirFaireSelectClientPourSelectionnerUnDtoClientAuCode111111111() throws Exception{
+		assertNotNull(dao.selectClient("111111111"));
+		assertEquals(1, dao.selectClient("111111111").size());
+	}	
 	/**
 	 * - Étant donné l'objet DaoClientImpl initialisé 
 	 * - Lorsque on utilise le savoir faire +deleteClient avec comme paramètre '111111111'
@@ -55,7 +80,9 @@ public class DaoClientImplTest {
 	@Test
 	public void initialiseDtoClientImplEtUtilisationDeSavoirFaireDeleteClientPourSupprimerDtoClientAUCode111111111() throws Exception{
 		assertEquals(1, dao.deleteClient("111111111"));
-	}	
+	}
+	
+	
 	/**
 	 * - Méthode intermède pour créer un objet DtoClient
 	 */
@@ -70,6 +97,21 @@ public class DaoClientImplTest {
 		client.setNom(nom);
 		client.setPrenom(prenom);
 		
+		return client;
+	}
+	/**
+	 * - Méthode intermède pour créer un objet DtoClient modifié
+	 */
+	private static DtoClient modifierDtoClientExistant(){
+		DtoClient client = new DtoClient();
+		
+		String codeClient = "111111111";
+		String nom = "nom modif";
+		String prenom = "prénom modif";
+		
+		client.setCodeClient(codeClient);
+		client.setNom(nom);
+		client.setPrenom(prenom);
 		return client;
 	}
 }

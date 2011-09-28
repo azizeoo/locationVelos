@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.norsys.formation.locationvelos.dto.DtoClient;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
 
 /**
@@ -62,6 +63,17 @@ public class ApplicationContextTest {
 		assertNotNull(list);
 		assertEquals(0, list.size());
 	}
-
+	/**
+	 * - Étant donné l'objet conn initialisé
+	 * - Lorsqu'on utilise le savoir faire +clientResultSetToList avec le paramètre 'null'
+	 * - On obtient une liste vide des vélos size = 0
+	 * 
+	 */
+	@Test
+	public void initialiseConnVerifieSavoirFaireClientResultSetToList() throws Exception {
+		List<DtoClient> list = ApplicationContext.clientResultSetToList(null);
+		assertNotNull(list);
+		assertEquals(0, list.size());
+	}
 }
 
