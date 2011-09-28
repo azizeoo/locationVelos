@@ -19,7 +19,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,7 +159,8 @@ public class VeloServiceImplTest {
 	@Test
 	public void initialiseVeloServiceImplEtVerfieSavoirFaireSupprimerVelo()
 			throws Exception {
-		when(dao.deleteVelo("")).thenReturn(1);
-		assertEquals(1, service.supprimerVelo(""));
+		when(dao.deleteVelo("1")).thenReturn(1,0);
+		assertEquals(1, service.supprimerVelo("1"));
+		assertEquals(0, service.supprimerVelo("1"));
 	}
 }
