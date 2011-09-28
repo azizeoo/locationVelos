@@ -64,7 +64,7 @@ public class DaoClientImplTest {
 	 * - Étant donné l'objet DaoClientImpl initialisé 
 	 * - Lorsque on utilise le savoir faire +selectClient avec comme paramètre '111111111'
 	 * - Alors on obtient resultSet comme résultat
-	 * - On utilisant le savoir faire +ApplicationContext.veloResultSetToList
+	 * - On utilisant le savoir faire +ApplicationContext.clientResultSetToList
 	 * - On obtient une liste d'un seul élément
 	 */
 	@Test

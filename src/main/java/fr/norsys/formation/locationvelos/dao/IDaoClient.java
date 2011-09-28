@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import fr.norsys.formation.locationvelos.dto.DtoClient;
-import fr.norsys.formation.locationvelos.dto.DtoVelo;
 
 /**
  * @author technomaker09

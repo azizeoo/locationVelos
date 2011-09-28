@@ -11,7 +11,6 @@ import java.util.List;
 
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
-import fr.norsys.formation.locationvelos.dto.DtoVelo;
 import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
