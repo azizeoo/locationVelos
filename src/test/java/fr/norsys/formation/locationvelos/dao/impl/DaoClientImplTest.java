@@ -11,6 +11,7 @@ import java.sql.Connection;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.norsys.formation.locationvelos.conf.IConfigurationDB;
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
 import fr.norsys.formation.locationvelos.util.ApplicationContext;
@@ -28,7 +29,7 @@ public class DaoClientImplTest {
 	private Connection conn;
 	@Before
 	public void DaoClientImpl() throws Exception{
-		conn = ApplicationContext.getConnexion();
+		conn = ApplicationContext.getConnexion(IConfigurationDB.INFO_DB);
 		dao = new DaoClientImpl(conn);
 	}
 	/**

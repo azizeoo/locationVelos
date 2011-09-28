@@ -22,21 +22,18 @@ import fr.norsys.formation.locationvelos.dto.DtoVelo;
  *
  */
 public class ApplicationContext {
-	private static final String URL 	= "jdbc:hsqldb:file:data/location-velos-db";
-	private static final String USER	= "LOCATION";
-	private static final String PWD		= "location";
 	private static JDBCDataSource DATASOURCE;
 	
 	/**
 	 * METHODE POUR CONFIGURER LES INFORMATIONS NÈCESSAIRES POUR ACCÈS A LA BASE DE DONNÈES
 	 * @return
 	 */
-	private static DataSource getApplicationDataSource() {
+	private static DataSource getApplicationDataSource(String[] infoDB) {
 		if (null == DATASOURCE) {
 			DATASOURCE = new JDBCDataSource();
-			DATASOURCE.setUrl(URL);
-			DATASOURCE.setUser(USER);
-			DATASOURCE.setPassword(PWD);
+			DATASOURCE.setUrl(infoDB[0]);
+			DATASOURCE.setUser(infoDB[1]);
+			DATASOURCE.setPassword(infoDB[2]);
 		}
 		return DATASOURCE;
 	}
@@ -46,8 +43,8 @@ public class ApplicationContext {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static Connection getConnexion() throws SQLException{
-		DataSource ds = getApplicationDataSource();
+	public static Connection getConnexion(String[] infoDB) throws SQLException{
+		DataSource ds = getApplicationDataSource(infoDB);
 		return ds.getConnection();
 	}
 	

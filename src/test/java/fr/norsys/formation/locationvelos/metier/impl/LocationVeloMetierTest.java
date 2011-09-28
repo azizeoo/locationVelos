@@ -3,22 +3,19 @@
  */
 package fr.norsys.formation.locationvelos.metier.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.sql.SQLException;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.norsys.formation.locationvelos.dao.IDaoVelo;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
 import fr.norsys.formation.locationvelos.metier.ILocationVeloMetier;
 import fr.norsys.formation.locationvelos.service.IClientService;
 import fr.norsys.formation.locationvelos.service.IVeloService;
-import fr.norsys.formation.locationvelos.service.impl.VeloServiceImpl;
 
 /**
  * @author technomaker09
@@ -54,6 +51,7 @@ public class LocationVeloMetierTest {
 		assertNotNull(metier.getServiceClient());
 		assertNotNull(metier.getServiceVelo());
 	}
+	
 	/**
 	 * - Étant donné l'objet LocationVeloMetierImpl initialisé - Lorsqu'on utilise le
 	 * - savoir faire +louerVeloAuClient - On obtient '1' comme résultat

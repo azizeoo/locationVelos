@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.norsys.formation.locationvelos.conf.IConfigurationDB;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
 
@@ -26,7 +27,7 @@ public class ApplicationContextTest {
 	@Before
 	public void initConnexion() throws Exception{
 		app = new ApplicationContext();
-		conn = ApplicationContext.getConnexion();
+		conn = ApplicationContext.getConnexion(IConfigurationDB.INFO_DB);
 	}
 	/**
 	 * - Soit l'objet conn, lorsqu'on l'initialise
