@@ -46,7 +46,7 @@ public class Main {
 		
 		dtoVelo.setClient(dtoClient);
 		try {
-			conn = ApplicationContext.getConnexion(IConfigurationDB.INFO_DB);
+			conn = ApplicationContext.getConnexion(ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 			IDaoClient daoClient = new DaoClientImpl(conn);
 			IDaoVelo daoVelo = new DaoVeloImpl(conn);
 			
@@ -59,7 +59,7 @@ public class Main {
 			}else {
 				System.out.println("Echéc de l'opération");
 			}
-			
+			conn.close();
 		} catch (SQLException e) {
 			System.out.println("Echéc !!!");
 		}

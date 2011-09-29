@@ -3,6 +3,8 @@
  */
 package fr.norsys.formation.locationvelos.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +15,10 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.hsqldb.jdbc.JDBCDataSource;
+import org.jdom.Document;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+import org.jdom.xpath.XPath;
 
 import fr.norsys.formation.locationvelos.dto.DtoClient;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
@@ -46,6 +52,29 @@ public class ApplicationContext {
 	public static Connection getConnexion(String[] infoDB) throws SQLException{
 		DataSource ds = getApplicationDataSource(infoDB);
 		return ds.getConnection();
+	}
+	/**
+	 * METHODE POUR RECUPERER LES DONNÈES A PARTIR D'UN FICHIER XML
+	 * @param nomFichierXML
+	 * @return
+	 */
+	public static String[] xmlToStrigDB(String nomFichierXML){
+		Document document = null;
+		String[] retour = new String[3];
+		File xmlFile = new File(nomFichierXML);
+
+		SAXBuilder builder = new SAXBuilder();
+		try {
+			document = builder.build(xmlFile);
+				retour[0] = XPath.newInstance("//url").valueOf(document.getRootElement());
+				retour[1] = XPath.newInstance("//username").valueOf(document.getRootElement());
+				retour[2] = XPath.newInstance("//password").valueOf(document.getRootElement());
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return retour;
 	}
 	
 	/**

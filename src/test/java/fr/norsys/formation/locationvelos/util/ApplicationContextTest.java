@@ -27,7 +27,7 @@ public class ApplicationContextTest {
 	@Before
 	public void initConnexion() throws Exception{
 		app = new ApplicationContext();
-		conn = ApplicationContext.getConnexion(IConfigurationDB.INFO_DB);
+		conn = ApplicationContext.getConnexion(ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 	}
 	/**
 	 * - Soit l'objet conn, lorsqu'on l'initialise
@@ -75,6 +75,18 @@ public class ApplicationContextTest {
 		List<DtoClient> list = ApplicationContext.clientResultSetToList(null);
 		assertNotNull(list);
 		assertEquals(0, list.size());
+	}
+	/**
+	 * - Étant donné l'objet conn initialisé
+	 * - Lorsqu'on utilise le savoir faire +clientResultSetToList avec le paramètre 'null'
+	 * - On obtient une liste vide des vélos size = 0
+	 * 
+	 */
+	@Test
+	public void initialiseConnVerifieSavoirFairexmlToStrigDB() throws Exception {
+		String[] info = ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME);
+		assertNotNull(info);
+		assertEquals(3, info.length);
 	}
 }
 

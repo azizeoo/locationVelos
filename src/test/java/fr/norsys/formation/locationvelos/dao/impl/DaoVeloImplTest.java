@@ -27,7 +27,7 @@ public class DaoVeloImplTest{
 	
 	@Before
 	public void DaoVeloImpl() throws Exception{
-		conn = ApplicationContext.getConnexion(IConfigurationDB.INFO_DB);
+		conn = ApplicationContext.getConnexion(ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 		dao = new DaoVeloImpl(conn);
 	}
 	
