@@ -3,6 +3,11 @@
  */
 package fr.norsys.formation.locationvelos.util;
 
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.clientResultSetToList;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.genCode;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.getConnexion;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.veloResultSetToList;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.xmlToStrigDB;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -22,12 +27,10 @@ import fr.norsys.formation.locationvelos.dto.DtoVelo;
  */
 public class ApplicationContextTest {
 	private Connection conn = null;
-	private ApplicationContext app = null;
 	
 	@Before
 	public void initConnexion() throws Exception{
-		app = new ApplicationContext();
-		conn = ApplicationContext.getConnexion(ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
+		conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 	}
 	/**
 	 * - Soit l'objet conn, lorsqu'on l'initialise
@@ -35,7 +38,6 @@ public class ApplicationContextTest {
 	 */
 	@Test
 	public void initialiseSavoirConnEtAppEtVerifierQuIlNestPasNull() throws Exception  {
-		assertNotNull(app);
 		assertNotNull(conn);
 	}
 
@@ -47,7 +49,7 @@ public class ApplicationContextTest {
 	 */
 	@Test
 	public void initialiseConnVerifieSavoirFaireGenCode() throws Exception {
-		String chaine = ApplicationContext.genCode();
+		String chaine = genCode();
 		assertNotNull(chaine);
 		assertEquals(10, chaine.length());
 	}
@@ -60,7 +62,7 @@ public class ApplicationContextTest {
 	 */
 	@Test
 	public void initialiseConnVerifieSavoirFaireVeloResultSetToList() throws Exception {
-		List<DtoVelo> list = ApplicationContext.veloResultSetToList(null);
+		List<DtoVelo> list = veloResultSetToList(null);
 		assertNotNull(list);
 		assertEquals(0, list.size());
 	}
@@ -72,7 +74,7 @@ public class ApplicationContextTest {
 	 */
 	@Test
 	public void initialiseConnVerifieSavoirFaireClientResultSetToList() throws Exception {
-		List<DtoClient> list = ApplicationContext.clientResultSetToList(null);
+		List<DtoClient> list = clientResultSetToList(null);
 		assertNotNull(list);
 		assertEquals(0, list.size());
 	}
@@ -84,7 +86,7 @@ public class ApplicationContextTest {
 	 */
 	@Test
 	public void initialiseConnVerifieSavoirFairexmlToStrigDB() throws Exception {
-		String[] info = ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME);
+		String[] info = xmlToStrigDB(IConfigurationDB.BD_FILENAME);
 		assertNotNull(info);
 		assertEquals(3, info.length);
 	}

@@ -3,6 +3,8 @@
  */
 package fr.norsys.formation.locationvelos.dao.impl;
 
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.getConnexion;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.xmlToStrigDB;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -15,7 +17,6 @@ import fr.norsys.formation.locationvelos.conf.IConfigurationDB;
 import fr.norsys.formation.locationvelos.dao.IDaoVelo;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
-import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
  * @author technomaker09
@@ -27,7 +28,7 @@ public class DaoVeloImplTest{
 	
 	@Before
 	public void DaoVeloImpl() throws Exception{
-		conn = ApplicationContext.getConnexion(ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
+		conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 		dao = new DaoVeloImpl(conn);
 	}
 	
@@ -65,7 +66,7 @@ public class DaoVeloImplTest{
 	 * - Étant donné l'objet DaoVeloImpl initialisé 
 	 * - Lorsque on utilise le savoir faire +selectVelo avec comme paramètre '111111111'
 	 * - Alors on obtient resultSet comme résultat
-	 * - On utilisant le savoir faire +ApplicationContext.veloResultSetToList
+	 * - On utilisant le savoir faire +veloResultSetToList
 	 * - On obtient une liste d'un seul élément
 	 */
 	@Test

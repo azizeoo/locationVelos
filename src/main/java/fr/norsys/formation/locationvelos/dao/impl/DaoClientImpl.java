@@ -2,6 +2,7 @@
  * 
  */
 package fr.norsys.formation.locationvelos.dao.impl;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.clientResultSetToList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,6 @@ import java.util.List;
 
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
-import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
  * @author technomaker09
@@ -67,7 +67,7 @@ public class DaoClientImpl implements IDaoClient {
 		pstmt.setString(1, code);
 		ResultSet rs = pstmt.executeQuery();
 		pstmt.close();
-		return ApplicationContext.clientResultSetToList(rs);
+		return clientResultSetToList(rs);
 	}
 
 }

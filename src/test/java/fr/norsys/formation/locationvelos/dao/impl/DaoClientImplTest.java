@@ -3,6 +3,8 @@
  */
 package fr.norsys.formation.locationvelos.dao.impl;
 
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.getConnexion;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.xmlToStrigDB;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -14,7 +16,6 @@ import org.junit.Test;
 import fr.norsys.formation.locationvelos.conf.IConfigurationDB;
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
 import fr.norsys.formation.locationvelos.dto.DtoClient;
-import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
  * @author technomaker09
@@ -29,7 +30,7 @@ public class DaoClientImplTest {
 	private Connection conn;
 	@Before
 	public void DaoClientImpl() throws Exception{
-		conn = ApplicationContext.getConnexion(ApplicationContext.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
+		conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 		dao = new DaoClientImpl(conn);
 	}
 	/**
@@ -65,7 +66,7 @@ public class DaoClientImplTest {
 	 * - Étant donné l'objet DaoClientImpl initialisé 
 	 * - Lorsque on utilise le savoir faire +selectClient avec comme paramètre '111111111'
 	 * - Alors on obtient resultSet comme résultat
-	 * - On utilisant le savoir faire +ApplicationContext.clientResultSetToList
+	 * - On utilisant le savoir faire +clientResultSetToList
 	 * - On obtient une liste d'un seul élément
 	 */
 	@Test

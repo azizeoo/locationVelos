@@ -2,6 +2,7 @@
  * 
  */
 package fr.norsys.formation.locationvelos.dao.impl;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.veloResultSetToList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,6 @@ import java.util.List;
 
 import fr.norsys.formation.locationvelos.dao.IDaoVelo;
 import fr.norsys.formation.locationvelos.dto.DtoVelo;
-import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
  * @author technomaker09
@@ -82,7 +82,7 @@ public class DaoVeloImpl implements IDaoVelo {
 		pstmt.setString(1, code);
 		ResultSet rs = pstmt.executeQuery();
 		pstmt.close();
-		return ApplicationContext.veloResultSetToList(rs);
+		return veloResultSetToList(rs);
 	}
 
 }
