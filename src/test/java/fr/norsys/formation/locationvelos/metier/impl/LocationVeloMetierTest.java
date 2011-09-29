@@ -65,4 +65,18 @@ public class LocationVeloMetierTest {
 		when(serviceVelo.ajouterVelo(dtoVelo)).thenReturn(1);
 		assertEquals(1, metier.louerVeloAuClient(dtoVelo,dtoClient));
 	}
+	/**
+	 * - Étant donné l'objet LocationVeloMetierImpl initialisé - Lorsqu'on utilise le
+	 * - savoir faire +louerVeloAuClient - quand le client n'existe pas
+	 * On obtient '0' comme résultat
+	 */
+	@Test
+	public void initialiseLocationVeloMetierImplEtVerfieSavoirFaireLouerVeloAuClientNoExistant()
+			throws Exception {
+		DtoClient dtoClient = new DtoClient();
+		DtoVelo dtoVelo = new DtoVelo();
+		when(serviceClient.ajouterClient(dtoClient)).thenReturn(0);
+		when(serviceVelo.ajouterVelo(dtoVelo)).thenReturn(1);
+		assertEquals(0, metier.louerVeloAuClient(dtoVelo,dtoClient));
+	}
 }
