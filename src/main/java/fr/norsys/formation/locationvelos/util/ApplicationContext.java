@@ -57,23 +57,21 @@ public class ApplicationContext {
 	 * METHODE POUR RECUPERER LES DONNÈES A PARTIR D'UN FICHIER XML
 	 * @param nomFichierXML
 	 * @return
+	 * @throws IOException 
+	 * @throws JDOMException 
 	 */
-	public static String[] xmlToStrigDB(String nomFichierXML){
+	public static String[] xmlToStrigDB(String nomFichierXML) throws JDOMException, IOException{
 		Document document = null;
 		String[] retour = new String[3];
 		File xmlFile = new File(nomFichierXML);
 
 		SAXBuilder builder = new SAXBuilder();
-		try {
+		
 			document = builder.build(xmlFile);
 				retour[0] = XPath.newInstance("//url").valueOf(document.getRootElement());
 				retour[1] = XPath.newInstance("//username").valueOf(document.getRootElement());
 				retour[2] = XPath.newInstance("//password").valueOf(document.getRootElement());
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		return retour;
 	}
 	

@@ -5,9 +5,13 @@ package fr.norsys.formation.locationvelos.main;
 
 import static fr.norsys.formation.locationvelos.util.ApplicationContext.genCode;
 import static fr.norsys.formation.locationvelos.util.ApplicationContext.getConnexion;
+import static fr.norsys.formation.locationvelos.util.ApplicationContext.xmlToStrigDB;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import org.jdom.JDOMException;
 
 import fr.norsys.formation.locationvelos.conf.IConfigurationDB;
 import fr.norsys.formation.locationvelos.dao.IDaoClient;
@@ -22,7 +26,6 @@ import fr.norsys.formation.locationvelos.service.IClientService;
 import fr.norsys.formation.locationvelos.service.IVeloService;
 import fr.norsys.formation.locationvelos.service.impl.ClientServiceImpl;
 import fr.norsys.formation.locationvelos.service.impl.VeloServiceImpl;
-import fr.norsys.formation.locationvelos.util.ApplicationContext;
 
 /**
  * @author technomaker09
@@ -49,8 +52,7 @@ public class Main {
 
 		dtoVelo.setClient(dtoClient);
 		try {
-			conn = getConnexion(ApplicationContext
-					.xmlToStrigDB(IConfigurationDB.BD_FILENAME));
+			conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 			IDaoClient daoClient = new DaoClientImpl(conn);
 			IDaoVelo daoVelo = new DaoVeloImpl(conn);
 
@@ -65,8 +67,12 @@ public class Main {
 				System.out.println("Echéc de l'opération");
 			}
 			conn.close();
+		} catch (IOException e) {
+			System.out.println("IOException : Echéc !!!");
+		} catch (JDOMException e) {
+			System.out.println("JDOMException : Echéc !!!");
 		} catch (SQLException e) {
-			System.out.println("Echéc !!!");
+			System.out.println("SQLException : Echéc !!!");
 		}
 
 	}

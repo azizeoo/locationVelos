@@ -27,9 +27,11 @@ import fr.norsys.formation.locationvelos.dto.DtoVelo;
  */
 public class ApplicationContextTest {
 	private Connection conn = null;
+	private ApplicationContext app;
 	
 	@Before
 	public void initConnexion() throws Exception{
+		app = new ApplicationContext();
 		conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
 	}
 	/**
@@ -38,6 +40,7 @@ public class ApplicationContextTest {
 	 */
 	@Test
 	public void initialiseSavoirConnEtAppEtVerifierQuIlNestPasNull() throws Exception  {
+		assertNotNull(app);
 		assertNotNull(conn);
 	}
 
