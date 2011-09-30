@@ -32,41 +32,14 @@ import fr.norsys.formation.locationvelos.service.impl.VeloServiceImpl;
  * 
  */
 public class Main {
-
+	private static Connection conn;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		Connection conn;
-		DtoClient dtoClient = new DtoClient();
-		DtoVelo dtoVelo = new DtoVelo();
-
-		dtoClient.setCodeClient(genCode());
-		dtoClient.setNom("boussabat");
-		dtoClient.setPrenom("abdelaziz");
-
-		dtoVelo.setCodeVelo(genCode());
-		dtoVelo.setMarque("VTT");
-		dtoVelo.setPrix(2000);
-
-		dtoVelo.setClient(dtoClient);
 		try {
-			conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
-			IDaoClient daoClient = new DaoClientImpl(conn);
-			IDaoVelo daoVelo = new DaoVeloImpl(conn);
-
-			IClientService serviceClient = new ClientServiceImpl(daoClient);
-			IVeloService serviceVelo = new VeloServiceImpl(daoVelo);
-
-			ILocationVeloMetier location = new LocationVeloMetierImpl(
-					serviceVelo, serviceClient);
-			if (1 == location.louerVeloAuClient(dtoVelo, dtoClient)) {
-				System.out.println("Succès de l'opération");
-			} else {
-				System.out.println("Echéc de l'opération");
-			}
-			conn.close();
+			traitement();
 		} catch (IOException e) {
 			System.out.println("IOException : Echéc !!!");
 		} catch (JDOMException e) {
@@ -76,5 +49,41 @@ public class Main {
 		}
 
 	}
+	public static DtoClient creerClient() {
+		DtoClient dtoClient = new DtoClient();
+		dtoClient.setCodeClient(genCode());
+		dtoClient.setNom("boussabat");
+		dtoClient.setPrenom("abdelaziz");
+		return dtoClient;
+	}
+	
+	public static DtoVelo creerVelo(DtoClient client) {
+		DtoVelo dtoVelo = new DtoVelo();
+		dtoVelo.setCodeVelo(genCode());
+		dtoVelo.setPrix(20000);
+		dtoVelo.setMarque("VTT");
+		dtoVelo.setClient(client);
+		return dtoVelo;
+	}
+	
+	public static boolean traitement() throws SQLException, JDOMException, IOException{
+		boolean retour = false;
+		conn = getConnexion(xmlToStrigDB(IConfigurationDB.BD_FILENAME));
+		IDaoClient daoClient = new DaoClientImpl(conn);
+		IDaoVelo daoVelo = new DaoVeloImpl(conn);
 
+		IClientService serviceClient = new ClientServiceImpl(daoClient);
+		IVeloService serviceVelo = new VeloServiceImpl(daoVelo);
+
+		ILocationVeloMetier location = new LocationVeloMetierImpl(
+				serviceVelo, serviceClient);
+		if (1 == location.louerVeloAuClient(creerVelo(creerClient()), creerClient())) {
+			System.out.println("Succès de l'opération");
+			retour = true;
+		} else {
+			System.out.println("Echéc de l'opération");
+		}
+		conn.close();
+		return retour;
+	}
 }
